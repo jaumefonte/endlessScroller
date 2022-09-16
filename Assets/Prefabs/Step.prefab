@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1388748953856051704}
   - component: {fileID: 5436271492931573277}
-  - component: {fileID: 8158028553788450608}
+  - component: {fileID: 1925889865007346282}
   m_Layer: 6
   m_Name: Display
   m_TagString: Obstacle
@@ -85,8 +85,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!70 &8158028553788450608
-CapsuleCollider2D:
+--- !u!60 &1925889865007346282
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -99,8 +99,23 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.9, y: 1}
-  m_Direction: 0
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.96, y: 0.96}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.36989063, y: 0.47648478}
+      - {x: -0.42259586, y: 0.43555424}
+      - {x: -0.47990113, y: 0.37414503}
+      - {x: -0.48, y: -0.48}
+      - {x: 0.48, y: -0.48}
+      - {x: 0.48, y: 0.48}
 --- !u!1 &7182162927898538342
 GameObject:
   m_ObjectHideFlags: 0
