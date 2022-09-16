@@ -127,6 +127,7 @@ public class PlayerController : MonoBehaviour
 
             onGround = true;
             if (jumping) jumping = false;
+            if (currentState == PlayerState.jumping) currentState = PlayerState.running;
 
         }
         else
