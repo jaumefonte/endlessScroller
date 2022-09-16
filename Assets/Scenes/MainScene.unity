@@ -434,7 +434,7 @@ Rigidbody2D:
   m_GameObject: {fileID: 811186807}
   m_BodyType: 1
   m_Simulated: 1
-  m_UseFullKinematicContacts: 0
+  m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
@@ -443,8 +443,8 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 4
+  m_CollisionDetection: 0
+  m_Constraints: 6
 --- !u!114 &811186810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -457,7 +457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 733ccd82efb2dbe4a9330e5a803e3e53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myVelocity: {x: -3, y: 0}
+  myVelocity: {x: -2, y: 0}
 --- !u!114 &811186811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -471,8 +471,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstaclesPrefabs:
-  - {fileID: 7182162927898538342, guid: 92d410d6f018a16478f1ef206c5e7839, type: 3}
-  - {fileID: 5749044877553652182, guid: ee7ffd994422a3c4daf75ec8da08365a, type: 3}
+  - {fileID: -6732872248759249475, guid: 92d410d6f018a16478f1ef206c5e7839, type: 3}
+  - {fileID: 1512900994082992857, guid: ee7ffd994422a3c4daf75ec8da08365a, type: 3}
   generationInterval: 1.5
   spawner: {fileID: 1168097989}
   obstacleDestroyer: {fileID: 890037520}

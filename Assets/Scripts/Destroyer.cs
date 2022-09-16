@@ -5,28 +5,26 @@ using UnityEngine.Pool;
 
 public class Destroyer : MonoBehaviour
 {
-    IObjectPool<GameObject> obstaclePool;
-    public void SetPool(IObjectPool<GameObject> currentPool)
+    IObjectPool<Obstacle> obstaclePool;
+    public void SetPool(IObjectPool<Obstacle> currentPool)
     {
         obstaclePool = currentPool;
     }
-    private void OnTriggerEnter2D(Collider2D collider)
+    
+
+    private void OnTriggerExit2D(Collider2D collider)
     {
+        Debug.Log("------------ OBSTACLE "+collider.name);
         if (collider.tag == "Player")
         {
             Debug.Log("------------ PLAyER");
             Destroy(collider.gameObject);
         }
-    }
-
-    private void OnTriggerExit2D(Collider2D collider)
-    {
-        Debug.Log("------------ OBSTACLE "+collider.name);
-        if (collider.tag == "Obstacle")
+        else if (collider.transform.parent.GetComponent<Obstacle>() != null)
         {
-            Debug.Log("------------ TAG");
-            //Destroy(collider.transform.parent.gameObject);
-            obstaclePool.Release(collider.transform.parent.gameObject);
+            Obstacle currentObstacle = collider.transform.parent.GetComponent<Obstacle>();
+            obstaclePool.Release(currentObstacle);
         }
+        
     }
 }

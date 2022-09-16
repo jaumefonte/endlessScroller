@@ -4,36 +4,36 @@ using UnityEngine;
 using UnityEngine.Pool;
 public class ObstacleGenerator : MonoBehaviour
 {
-    [SerializeField] List<GameObject> obstaclesPrefabs;
+    [SerializeField] List<Obstacle> obstaclesPrefabs;
     [SerializeField] float generationInterval;
     float generationTimer;
     int obstacleIndex = 0;
     [SerializeField] Transform spawner;
-    public IObjectPool<GameObject> obstaclePool;
+    public IObjectPool<Obstacle> obstaclePool;
     [SerializeField] Destroyer obstacleDestroyer;
     private void Awake()
     {
-        obstaclePool = new ObjectPool<GameObject>(GenerateObstacle, GetObstacle, ReleaseObstacle, DestroyObstacle, true, 20, 20);
+        obstaclePool = new ObjectPool<Obstacle>(GenerateObstacle, GetObstacle, ReleaseObstacle, DestroyObstacle, true, 20, 20);
         obstacleDestroyer.SetPool(obstaclePool);
     }
-    GameObject GenerateObstacle()
+    Obstacle GenerateObstacle()
     {
-        GameObject currentObstacle = obstaclesPrefabs[Random.Range(0, obstaclesPrefabs.Count)];
+        Obstacle currentObstacle = obstaclesPrefabs[Random.Range(0, obstaclesPrefabs.Count)];
         Vector3 obstaclePosition = new Vector3(spawner.position.x, currentObstacle.transform.position.y, currentObstacle.transform.position.z);
-        GameObject currentInstance = GameObject.Instantiate(currentObstacle, obstaclePosition, Quaternion.identity);
+        Obstacle currentInstance = GameObject.Instantiate(currentObstacle, obstaclePosition, Quaternion.identity);
         currentInstance.transform.SetParent(transform);
         return currentInstance;
     }
-    private void GetObstacle(GameObject obj)
+    private void GetObstacle(Obstacle obj)
     {
-        obj.SetActive(true);
+        obj.gameObject.SetActive(true);
         obj.transform.position = new Vector3(spawner.position.x,obj.transform.position.y, obj.transform.position.z);
     }
-    private void ReleaseObstacle(GameObject obj)
+    private void ReleaseObstacle(Obstacle obj)
     {
-        obj.SetActive(false);
+        obj.gameObject.SetActive(false);
     }
-    private void DestroyObstacle(GameObject obj)
+    private void DestroyObstacle(Obstacle obj)
     {
         Destroy(obj);
     }

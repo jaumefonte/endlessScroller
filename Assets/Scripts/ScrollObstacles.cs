@@ -9,10 +9,11 @@ public class ScrollObstacles : MonoBehaviour
     void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
+        myRigidbody.velocity = myVelocity;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        myRigidbody.velocity = myVelocity;
+        transform.position += new Vector3(myVelocity.x, myVelocity.y, 0) * Time.deltaTime;
     }
 }
