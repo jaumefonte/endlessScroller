@@ -5,6 +5,7 @@ using UnityEngine.Pool;
 
 public class Destroyer : MonoBehaviour
 {
+    [SerializeField] GameObject GameOverCanvas;
     IObjectPool<Obstacle> obstaclePool;
     public void SetPool(IObjectPool<Obstacle> currentPool)
     {
@@ -19,6 +20,7 @@ public class Destroyer : MonoBehaviour
         {
             Debug.Log("------------ PLAyER");
             Destroy(collider.gameObject);
+            GameOverCanvas.SetActive(true);
         }
         else if (collider.transform.parent.GetComponent<Obstacle>() != null)
         {

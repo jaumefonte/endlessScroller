@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.Pool;
 public class ObstacleGenerator : MonoBehaviour
 {
-    [SerializeField] List<Obstacle> obstaclesPrefabs;
+    [SerializeField] Obstacle obstaclePrefab;
+    [SerializeField] List<GameObject> obstaclesPrefabs;
     [SerializeField] float generationInterval;
     float generationTimer;
     int obstacleIndex = 0;
@@ -18,14 +19,17 @@ public class ObstacleGenerator : MonoBehaviour
     }
     Obstacle GenerateObstacle()
     {
-        Obstacle currentObstacle = obstaclesPrefabs[Random.Range(0, obstaclesPrefabs.Count)];
+        Obstacle currentObstacle = obstaclePrefab;
         Vector3 obstaclePosition = new Vector3(spawner.position.x, currentObstacle.transform.position.y, currentObstacle.transform.position.z);
-        Obstacle currentInstance = GameObject.Instantiate(currentObstacle, obstaclePosition, Quaternion.identity);
+        Obstacle currentInstance = GameObject.Instantiate(currentObstacle, obstaclePosition, Quaternion.identity);        
+        currentInstance.SetObstaclesList(obstaclesPrefabs);
+        currentInstance.GenerateObstacle();
         currentInstance.transform.SetParent(transform);
         return currentInstance;
     }
     private void GetObstacle(Obstacle obj)
     {
+        obj.GenerateObstacle();
         obj.gameObject.SetActive(true);
         obj.transform.position = new Vector3(spawner.position.x,obj.transform.position.y, obj.transform.position.z);
     }

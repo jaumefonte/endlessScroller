@@ -21,7 +21,8 @@ public class PlayerController : MonoBehaviour
     public float startJump;
     RaycastHit2D groundHit;
     public bool canJump = true;
-    
+    public enum PlayerState { running, jumping, dashing }
+    public PlayerState currentState;
     
     void Start()
     {
@@ -37,7 +38,7 @@ public class PlayerController : MonoBehaviour
             jumping = true;
             startJump = transform.position.y;
             myVelocity.y = myJump;
-           
+            currentState = PlayerState.jumping;
         }
             
     }
@@ -45,19 +46,28 @@ public class PlayerController : MonoBehaviour
     {
         canJump = true;
         if (onGround)
-        {
-            crouching = true;
-            GetComponent<CapsuleCollider2D>().size = new Vector2(myCollider.size.x, 0.6f);
-            GetComponent<CapsuleCollider2D>().offset = new Vector2(0, 0.28f);
+        {            
+            StartCoroutine(Dash());
         }
 
     }
+    IEnumerator Dash()
+    {
+        currentState = PlayerState.dashing;
+        crouching = true;
+        GetComponent<CapsuleCollider2D>().size = new Vector2(myCollider.size.x, 0.6f);
+        GetComponent<CapsuleCollider2D>().offset = new Vector2(0, 0.28f);
+        myVelocity.x = 0.2f;
+        yield return new WaitForSeconds(0.5f);
+        GetUp();
+    }
     void GetUp()
     {
+        currentState = PlayerState.running;
         canJump = true;
-        crouching = false;
         GetComponent<CapsuleCollider2D>().size = new Vector2(myCollider.size.x, 1.2f);
         GetComponent<CapsuleCollider2D>().offset = new Vector2(0, -0.08f);
+        myVelocity.x = 0;
     }
     void Update()
     {
@@ -67,15 +77,20 @@ public class PlayerController : MonoBehaviour
             {
                 Jump();
             }
-            
+            crouching = false;
         }
         else if (Input.GetAxis("Vertical") < 0)
         {
-            Crouch();
+            if (!crouching)
+            {
+                Crouch();
+            }
+            
         }
         else
         {
             GetUp();
+            crouching = false;
         }
         if (jumping)
         {

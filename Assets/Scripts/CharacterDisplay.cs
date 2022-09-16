@@ -24,20 +24,31 @@ public class CharacterDisplay : MonoBehaviour
     {
         animRunningTime += Time.deltaTime;
         
-        if (!control.jumping)
-        {
-            if (control.crouching)
-            {
-                AnimateDash();
-            }
-            else 
-            {
-                AnimateRun();
-            }
+        //if (!control.jumping)
+        //{
+        //    if (control.crouching)
+        //    {
+        //        AnimateDash();
+        //    }
+        //    else 
+        //    {
+        //        AnimateRun();
+        //    }
             
+        //}
+        //else { AnimateJump(); }
+        switch (control.currentState)
+        {
+            case PlayerController.PlayerState.running:
+                AnimateRun();
+                break;
+            case PlayerController.PlayerState.jumping:
+                AnimateJump();
+                break;
+            case PlayerController.PlayerState.dashing:
+                AnimateDash();
+                break;
         }
-        else { AnimateJump(); }
-        
         
     }
     void AnimateDash()
